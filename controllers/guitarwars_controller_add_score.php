@@ -1,8 +1,8 @@
 <?php
 
-require_once(__DIR__ . '../../appvars.php');
 require(__DIR__ . '../../models/repository/common/dbc_repository.php');
 require(__DIR__ . '../../models/repository/guitarwars/guitarwars_repository_insert.php');
+require(__DIR__ . '../../models/repository/guitarwars/guitarwars_repository_save_screenshot.php');
 
 function guitarwars_controller_add_score()
 {
@@ -24,30 +24,16 @@ function guitarwars_controller_add_score()
 
     $view_model['screenshot'] =  $_FILES['screenshot']['name']; //obtem o nome do arquivo
 
-    if (empty($view_model['name'])) {
-        $view_model['message'] = 'The field name is mandatory.';
+    $view_model['message'] = guitarwars_controller_validate_form($view_model);
+
+    if ($view_model['message'] != null) {
         return $view_model;
     }
 
-    if (empty($view_model['score'])) {
-        $view_model['message'] = 'The field score is mandatory.';
-        return $view_model;
-    }
+    $result_save_screenshot = guitarwars_repository_save_screenshot($_FILES['screenshot']);
 
-    if (empty($view_model['screenshot'])) {
-        $view_model['message'] = 'The field screenshot is mandatory.';
-        return $view_model;
-    } else {
-        echo   $view_model['screenshot'] . '<br/>';
-        echo $_FILES['screenshot']['tmp_name'] . '<br/>';
-        echo  GW_UPLOAD_PATH . $view_model['screenshot'] . '<br/>';
-    }
+    if (!$result_save_screenshot) {
 
-    $target = GW_UPLOAD_PATH . $view_model['screenshot'];
-
-    $result_move = move_uploaded_file($_FILES['screenshot']['tmp_name'], $target); //move o arquivo da pasta temporária para pasta images
-
-    if (!$result_move) {
         $view_model['message'] = 'Can not move the file uploaded!';
 
         return $view_model;
@@ -67,4 +53,21 @@ function guitarwars_controller_add_score()
     $view_model['result_insert'] = true;
 
     return $view_model;
+}
+
+function guitarwars_controller_validate_form($view_model)
+{
+    if (empty($view_model['name'])) {
+        return 'The field name is mandatory.';
+    }
+
+    if (empty($view_model['score'])) {
+        return 'The field score is mandatory.';
+    }
+
+    if (empty($view_model['screenshot'])) {
+        return 'The field screenshot is mandatory.';
+    }
+
+    return null;
 }

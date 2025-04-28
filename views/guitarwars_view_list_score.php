@@ -12,6 +12,15 @@ $result_view_model = guitarwars_controller_list_score();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guitar Wars - High Scores</title>
+    <style>
+        img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+
+        }
+    </style>
 </head>
 
 <body>
@@ -23,7 +32,7 @@ $result_view_model = guitarwars_controller_list_score();
     <hr>
     <?php while ($row = mysqli_fetch_array($result_view_model['result_select'])) { ?>
         <div style="display: flex;">
-            <div >
+            <div>
                 <p>
                     <span style="color:red;"><?php echo $row['score']; ?></span>
                 </p>
