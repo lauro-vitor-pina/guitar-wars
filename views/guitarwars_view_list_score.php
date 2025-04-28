@@ -1,5 +1,5 @@
 <?php
-
+require_once(__DIR__ . '../../appvars.php');
 require(__DIR__ . '../../controllers/guitarwars_controller_list_score.php');
 
 $result_view_model = guitarwars_controller_list_score();
@@ -22,21 +22,37 @@ $result_view_model = guitarwars_controller_list_score();
     </p>
     <hr>
     <?php while ($row = mysqli_fetch_array($result_view_model['result_select'])) { ?>
-        <div>
-            <p>
-                <span style="color:red;"><?php echo $row['score']; ?></span>
-            </p>
-            <p>
-                <b>Name:</b> <span> <?php echo $row['name']; ?> </span>
-            </p>
-            <p>
-                <b>Date:</b>
-                <span>
-                    <?php
-                    echo date('d/m/Y H:i:s', strtotime($row['date']));
-                    ?>
-                </span>
-            </p>
+        <div style="display: flex;">
+            <div >
+                <p>
+                    <span style="color:red;"><?php echo $row['score']; ?></span>
+                </p>
+                <p>
+                    <b>Name:</b> <span> <?php echo $row['name']; ?> </span>
+                </p>
+                <p>
+                    <b>Date:</b>
+                    <span>
+                        <?php
+                        echo date('d/m/Y H:i:s', strtotime($row['date']));
+                        ?>
+                    </span>
+                </p>
+            </div>
+            <div>
+                <?php
+
+                $file = '../' . GW_IMAGE_PATH . $row['screenshot'];
+
+                if (is_file($file) && filesize($file) > 0) {
+                    echo "<img src='$file'  /> ";
+                } else {
+                    echo '<p>Não verificado!<p>';
+                }
+
+                ?>
+
+            </div>
         </div>
         <br />
     <?php } ?>

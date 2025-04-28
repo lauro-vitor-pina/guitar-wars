@@ -1,5 +1,5 @@
 <?php
-
+require_once(__DIR__ . '../../appvars.php');
 require(__DIR__ . '../../controllers/guitarwars_controller_add_score.php');
 
 $result_view_model = guitarwars_controller_add_score();
@@ -28,7 +28,9 @@ $result_view_model = guitarwars_controller_add_score();
 
         <p>
             <strong>Name:</strong> <?php echo $result_view_model['name']; ?> <br />
-            <strong>Score:</strong> <?php echo $result_view_model['score']; ?>
+            <strong>Score:</strong> <?php echo $result_view_model['score']; ?> <br />
+            <strong>Screenshot:</strong> <br />
+            <img src="<?php echo '../' . GW_IMAGE_PATH . $result_view_model['screenshot']; ?>" alt="image">
         </p>
         <p>
             <a href="guitarwars_view_list_score.php">&lt;&lt; Back to high scores</a>
@@ -36,19 +38,26 @@ $result_view_model = guitarwars_controller_add_score();
 
     <?php } else { ?>
 
-        <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+        <form enctype="multipart/form-data" method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <h2>Guitar Wars - Add Your High Score</h2>
 
             <hr>
 
             <div>
-                <label for="name">Name</label>
+                <label for="name">Name:</label>
                 <input type="text" name="name" value="<?php echo $result_view_model['name']; ?>">
             </div>
             <br>
+
             <div>
-                <label for="score">Score</label>
+                <label for="score">Score:</label>
                 <input type="number" name="score" min="0" value="<?php echo $result_view_model['score']; ?>">
+            </div>
+            <br>
+
+            <div>
+                <label for="screenshot">Screenshot:</label>
+                <input type="file" id="screenshot" name="screenshot" value="<?php echo $result_view_model['screenshot']; ?>" />
             </div>
 
             <hr>
