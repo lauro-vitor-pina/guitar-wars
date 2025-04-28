@@ -14,13 +14,6 @@ $result_view_model = guitarwars_controller_add_score();
 </head>
 
 <body>
-    <?php
-
-    if (!empty($result_view_model['message'])) {
-        echo '<span style="color:red;">' . $result_view_model['message'] . '</span>';
-    }
-
-    ?>
 
     <?php if ($result_view_model['result_insert']) { ?>
 
@@ -64,6 +57,15 @@ $result_view_model = guitarwars_controller_add_score();
 
             <input type="submit" name="submit" value="Add">
         </form>
+
+        <?php
+
+        if (!empty($result_view_model['message'])) {
+            echo '<span style="color:red;">' . $result_view_model['message'] . '</span>';
+        }
+
+        ?>
+
 
     <?php } ?>
 

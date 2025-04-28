@@ -11,7 +11,8 @@ function guitarwars_controller_add_score()
         'name' => '',
         'score' =>  0,
         'screenshot' => '',
-        'result_insert' => false,
+        'screenshot_tmp_name' => '',
+        'result_insert' => false
     ];
 
     if (!isset($_POST['submit'])) {
@@ -22,7 +23,9 @@ function guitarwars_controller_add_score()
 
     $view_model['score'] = trim($_POST['score']);
 
-    $view_model['screenshot'] =  $_FILES['screenshot']['name']; //obtem o nome do arquivo
+    $view_model['screenshot'] = $_FILES['screenshot']['name'];
+
+    $view_model['screenshot_tmp_name'] = $_FILES['screenshot']['tmp_name'];
 
     $view_model['message'] = guitarwars_controller_validate_form($view_model);
 
@@ -30,7 +33,9 @@ function guitarwars_controller_add_score()
         return $view_model;
     }
 
-    $result_save_screenshot = guitarwars_repository_save_screenshot($_FILES['screenshot']);
+    $view_model['screenshot'] = date('d-m-Y-H-i-s-') .  $_FILES['screenshot']['name'];
+
+    $result_save_screenshot = guitarwars_repository_save_screenshot($view_model);
 
     if (!$result_save_screenshot) {
 
@@ -41,12 +46,7 @@ function guitarwars_controller_add_score()
 
     $dbc = dbc_repository_get_connection();
 
-    guitarwars_repository_insert(
-        $dbc,
-        $view_model['name'],
-        $view_model['score'],
-        $view_model['screenshot']
-    );
+    guitarwars_repository_insert($dbc, $view_model);
 
     dbc_repository_close_connection($dbc);
 
