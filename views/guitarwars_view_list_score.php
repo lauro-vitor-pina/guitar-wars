@@ -18,7 +18,13 @@ $result_view_model = guitarwars_controller_list_score();
             height: 200px;
             object-fit: cover;
             border-radius: 8px;
+        }
 
+        .topscoreheader {
+            text-align: center;
+            font-size: 200%;
+            background-color: #36407F;
+            color: #FFFFFF;
         }
     </style>
 </head>
@@ -30,7 +36,18 @@ $result_view_model = guitarwars_controller_list_score();
         <a href="guitarwars_view_add_score.php">just add your score</a>.
     </p>
     <hr>
-    <?php while ($row = mysqli_fetch_array($result_view_model['result_select'])) { ?>
+    <?php
+
+    $i = 0;
+
+    while ($row = mysqli_fetch_array($result_view_model['result_select'])) {
+
+        if ($i == 0) {
+            echo '<div class="topscoreheader"> Top Score : ' . $row['score'] . '</div> ';
+            echo '<br/>';
+        }
+
+    ?>
         <div style="display: flex;">
             <div>
                 <p>
@@ -42,9 +59,7 @@ $result_view_model = guitarwars_controller_list_score();
                 <p>
                     <b>Date:</b>
                     <span>
-                        <?php
-                        echo date('d/m/Y H:i:s', strtotime($row['date']));
-                        ?>
+                        <?php echo date('d/m/Y H:i:s', strtotime($row['date'])); ?>
                     </span>
                 </p>
             </div>
@@ -64,7 +79,10 @@ $result_view_model = guitarwars_controller_list_score();
             </div>
         </div>
         <br />
-    <?php } ?>
+    <?php
+        $i++;
+    }
+    ?>
 </body>
 
 </html>
