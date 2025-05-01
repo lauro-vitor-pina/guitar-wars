@@ -1,73 +1,42 @@
 <?php
 
-require(__DIR__ . '../../models/repository/common/dbc_repository.php');
-require(__DIR__ . '../../models/repository/guitarwars/guitarwars_repository_insert.php');
-require(__DIR__ . '../../models/repository/guitarwars/guitarwars_repository_save_screenshot.php');
+require(__DIR__ . '../../models/services/guitarwars_service_add_score.php');
 
-function guitarwars_controller_add_score()
+function guitarwars_controller_add_score(): array
 {
+    $name =  isset($_POST['name']) ? trim($_POST['name']) : '';
+    $score =   isset($_POST['score']) ? trim($_POST['score']) : 0;
+    $screenshot = isset($_FILES['screenshot']) ? $_FILES['screenshot'] : null;
+    $screenshot_name = isset($_FILES['screenshot']['name']) ? date('d-m-Y-H-i-s-') . $_FILES['screenshot']['name'] : '';
+    $screenshot_tmp =  isset($_FILES['screenshot']['tmp_name']) ?  $_FILES['screenshot']['tmp_name'] : '';
+    $screenshot_size = isset($_FILES['screenshot']['size']) ?  $_FILES['screenshot']['size'] : 0;
+    $screenshot_type = isset($_FILES['screenshot']['type']) ? $_FILES['screenshot']['type'] : '';
+
     $view_model = [
         'message' => '',
-        'name' => '',
-        'score' =>  0,
-        'screenshot' => '',
-        'screenshot_tmp_name' => '',
-        'result_insert' => false
+        'name' =>  $name,
+        'score' =>  $score,
+        'screenshot' => $screenshot,
+        'screenshot_name' =>  $screenshot_name,
+        'insert_result' => false
     ];
 
     if (!isset($_POST['submit'])) {
         return $view_model;
     }
 
-    $view_model['name'] = trim($_POST['name']);
+    $add_score_result = guitarwars_service_add_score(
+        $name,
+        $score,
+        $screenshot_name,
+        $screenshot_tmp,
+        $screenshot_type,
+        $screenshot_size
+    );
 
-    $view_model['score'] = trim($_POST['score']);
+    $view_model['message'] = $add_score_result;
 
-    $view_model['screenshot'] = $_FILES['screenshot']['name'];
-
-    $view_model['screenshot_tmp_name'] = $_FILES['screenshot']['tmp_name'];
-
-    $view_model['message'] = guitarwars_controller_validate_form($view_model);
-
-    if ($view_model['message'] != null) {
-        return $view_model;
-    }
-
-    $view_model['screenshot'] = date('d-m-Y-H-i-s-') .  $_FILES['screenshot']['name'];
-
-    $result_save_screenshot = guitarwars_repository_save_screenshot($view_model);
-
-    if (!$result_save_screenshot) {
-
-        $view_model['message'] = 'Can not move the file uploaded!';
-
-        return $view_model;
-    }
-
-    $dbc = dbc_repository_get_connection();
-
-    guitarwars_repository_insert($dbc, $view_model);
-
-    dbc_repository_close_connection($dbc);
-
-    $view_model['result_insert'] = true;
+    $view_model['insert_result'] = is_null($add_score_result);
 
     return $view_model;
-}
-
-function guitarwars_controller_validate_form($view_model)
-{
-    if (empty($view_model['name'])) {
-        return 'The field name is mandatory.';
-    }
-
-    if (empty($view_model['score'])) {
-        return 'The field score is mandatory.';
-    }
-
-    if (empty($view_model['screenshot'])) {
-        return 'The field screenshot is mandatory.';
-    }
-
-    return null;
 }
