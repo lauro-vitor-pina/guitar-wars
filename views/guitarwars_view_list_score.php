@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__ . '../../appvars.php');
+
 require(__DIR__ . '../../controllers/guitarwars_controller_list_score.php');
 
 $result_view_model = guitarwars_controller_list_score();
@@ -40,7 +41,7 @@ $result_view_model = guitarwars_controller_list_score();
 
     $i = 0;
 
-    while ($row = mysqli_fetch_array($result_view_model['result_select'])) {
+    while ($row = mysqli_fetch_array($result_view_model['select_result'])) {
 
         if ($i == 0) {
             echo '<div class="topscoreheader"> Top Score : ' . $row['score'] . '</div> ';

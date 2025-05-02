@@ -2,7 +2,7 @@
 
 require(__DIR__ . '../../models/services/guitarwars_service_select.php');
 
-function guitarwars_controller_list_score()
+function guitarwars_controller_admin()
 {
     $view_model_result = guitarwars_service_select();
 
