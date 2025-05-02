@@ -22,6 +22,7 @@ $view_model_result = guitarwars_controller_admin();
             <th>Name</th>
             <th>Date</th>
             <th>Score</th>
+            <th>Screenshot</th>
             <th>Action</th>
         </tr>
         <?php while ($row = mysqli_fetch_array($view_model_result['select_result'])) { ?>
@@ -29,13 +30,15 @@ $view_model_result = guitarwars_controller_admin();
                 <td><?php echo $row['name']; ?></td>
                 <td><?php echo $row['date']; ?></td>
                 <td><?php echo $row['score']; ?></td>
+                <td><?php echo $row['screenshot'] ?? '-'; ?></td>
                 <td>
                     <?php
                     $query_string  =
                         'id=' . $row['id'] . '&amp;' .
                         'name=' . $row['name'] . '&amp;' .
                         'date=' . $row['date'] . '&amp;' .
-                        'score=' . $row['score'];
+                        'score=' . $row['score'] . '&amp;' .
+                        'screenshot=' . $row['screenshot'];
                     ?>
                     <a href="guitarwars_view_remove_score.php?<?php echo $query_string; ?>">
                         Remove
