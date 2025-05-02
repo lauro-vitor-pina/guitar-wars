@@ -11,7 +11,7 @@ function guitarwars_service_select()
 
     $dbc = dbc_repository_get_connection();
 
-    $result_view_model['select_result'] = guitarwars_repository_select($dbc);
+    $result_view_model['select_result'] = guitarwars_repository_select($dbc, null, 'score', 'DESC');
 
     dbc_repository_close_connection($dbc);
 
