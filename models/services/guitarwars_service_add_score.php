@@ -3,6 +3,7 @@
 require(__DIR__ . '../../repository/common/dbc_repository.php');
 require(__DIR__ . '../../repository/guitarwars/guitarwars_repository_insert.php');
 require(__DIR__ . '../../repository/guitarwars/guitarwars_repository_upload_screenshot.php');
+require(__DIR__ . '../../repository/guitarwars/guitarwars_repository_delete_screenshot.php');
 
 function guitarwars_service_add_score(
     string $name,
@@ -22,7 +23,7 @@ function guitarwars_service_add_score(
 
     if ($validation_result != null) {
 
-        delete_temporary_file($screenshot_tmp);
+        guitarwars_repository_delete_screenshot($screenshot_tmp);
 
         return $validation_result;
     }
@@ -34,7 +35,7 @@ function guitarwars_service_add_score(
 
     if (!$upload_result) {
 
-        delete_temporary_file($screenshot_tmp);
+        guitarwars_repository_delete_screenshot($screenshot_tmp);
 
         return 'Error to upload file';
     }
@@ -100,11 +101,4 @@ function validate_type_image(string $screenshot_type): bool
     }
 
     return false;
-}
-
-function delete_temporary_file(string $screenshot_tmp): void
-{
-    if (file_exists($screenshot_tmp)) {
-        unlink($screenshot_tmp);
-    }
 }
