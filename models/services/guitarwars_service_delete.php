@@ -1,9 +1,7 @@
 <?php
 
-require_once(__DIR__ . '../../../appvars.php');
 require_once(__DIR__ . '../../repository/common/dbc_repository.php');
 require_once(__DIR__ . '../../repository/guitarwars/guitarwars_repository_delete.php');
-require_once(__DIR__ . '../../repository/guitarwars/guitarwars_repository_delete_screenshot.php');
 
 function guitarwars_service_delete(int $id, string $screenshot): bool
 {
