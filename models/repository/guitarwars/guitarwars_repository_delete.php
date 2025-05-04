@@ -7,7 +7,7 @@ function guitarwars_repository_delete(mysqli $dbc, int $id, ?string $screenshot)
 {
     if (!empty($screenshot)) {
 
-        $filename = __DIR__ . '/../../' . GW_IMAGE_PATH . $screenshot;
+        $filename = __DIR__  . '../../../../../' . GW_IMAGE_PATH . $screenshot;
         
         if (!file_exists($filename)) {
             throw new Exception("File not found in path <$filename>");

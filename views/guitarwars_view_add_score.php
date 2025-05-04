@@ -23,7 +23,7 @@ $result_view_model = guitarwars_controller_add_score();
             <strong>Name:</strong> <?php echo $result_view_model['name']; ?> <br />
             <strong>Score:</strong> <?php echo $result_view_model['score']; ?> <br />
             <strong>Screenshot:</strong> <br />
-            <img src="<?php echo '../' . GW_IMAGE_PATH . $result_view_model['screenshot_name']; ?>" alt="image">
+            <img src="<?php echo '../../' . GW_IMAGE_PATH . $result_view_model['screenshot_name']; ?>" alt="image">
         </p>
         <p>
             <a href="guitarwars_view_list_score.php">&lt;&lt; Back to high scores</a>

@@ -67,7 +67,7 @@ $result_view_model = guitarwars_controller_list_score();
             <div>
                 <?php
 
-                $file = '../' . GW_IMAGE_PATH . $row['screenshot'];
+                $file = '../../' . GW_IMAGE_PATH . $row['screenshot'];
 
                 if (is_file($file) && filesize($file) > 0) {
                     echo "<img src='$file'  /> ";
