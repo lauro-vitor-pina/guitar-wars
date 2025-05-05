@@ -1,7 +1,7 @@
 <?php
-require_once(dirname(__DIR__)  . '/appvars.php');
+require_once(__DIR__ . '../../appvars.php');
 
-require_once(dirname(__DIR__) . '/controllers/guitarwars/guitarwars_controller_list_score.php');
+require_once(__DIR__. '../../controllers/guitarwars/guitarwars_controller_list_score.php');
 
 $result_view_model = guitarwars_controller_list_score();
 

@@ -1,7 +1,7 @@
 <?php
 
 require_once(__DIR__ . '../../../appvars.php');
-require_once(__DIR__ . '../../../models/repository/file/file_repository_get_realpath.php');
+require_once(__DIR__ . '../../../models/repository/file/file_repository_upload.php');
 
 $file_name = $_GET['file_name'] ?? '';
 
@@ -11,7 +11,8 @@ try {
     //Returns the canonicalized absolute pathname on success. 
     //The resulting path will have no symbolic link, /./ or /../ components. 
     //Trailing delimiters, such as \ and /, are also removed.
-    $realpath =  file_repository_get_realpath($file_name, GW_IMAGE_PATH);
+
+    $realpath = get_absolute_path(GW_IMAGE_PATH) . DIRECTORY_SEPARATOR . $file_name;
 } catch (Exception $ex) {
 
     http_response_code(404);
