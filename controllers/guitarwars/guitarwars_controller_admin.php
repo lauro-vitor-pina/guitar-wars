@@ -1,6 +1,6 @@
 <?php
 
-require(__DIR__ . '../../models/services/guitarwars_service_select.php');
+require(__DIR__ . '../../../models/services/guitarwars_service_select.php');
 
 function guitarwars_controller_admin()
 {

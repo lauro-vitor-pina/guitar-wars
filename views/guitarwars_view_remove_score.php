@@ -1,6 +1,6 @@
 <?php
 
-require(__DIR__ . '../../controllers/guitarwars_controller_remove_score.php');
+require_once(__DIR__ . '../../controllers/guitarwars/guitarwars_controller_remove_score.php');
 
 $view_model_result = guitarwars_controller_remove_score();
 

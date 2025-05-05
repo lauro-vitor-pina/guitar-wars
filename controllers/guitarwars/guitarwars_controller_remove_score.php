@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '../../models/services/guitarwars_service_delete.php');
+require_once(__DIR__ . '../../../models/services/guitarwars_service_delete.php');
 
 function guitarwars_controller_remove_score()
 {

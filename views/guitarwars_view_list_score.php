@@ -1,7 +1,7 @@
 <?php
-require_once(__DIR__ . '../../appvars.php');
+require_once(dirname(__DIR__)  . '/appvars.php');
 
-require(__DIR__ . '../../controllers/guitarwars_controller_list_score.php');
+require_once(dirname(__DIR__) . '/controllers/guitarwars/guitarwars_controller_list_score.php');
 
 $result_view_model = guitarwars_controller_list_score();
 
@@ -67,10 +67,13 @@ $result_view_model = guitarwars_controller_list_score();
             <div>
                 <?php
 
-                $file = '../../' . GW_IMAGE_PATH . $row['screenshot'];
+                $screenshot =  $row['screenshot'];
+
+                $file = '../../' . GW_IMAGE_PATH . $screenshot;
 
                 if (is_file($file) && filesize($file) > 0) {
-                    echo "<img src='$file'  /> ";
+                    $url = URL_IMAGE_PROXY . $screenshot;
+                    echo "<img src='$url'/>";
                 } else {
                     echo '<p>Não verificado!<p>';
                 }

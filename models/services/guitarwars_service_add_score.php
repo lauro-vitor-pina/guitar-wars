@@ -2,8 +2,8 @@
 
 require(__DIR__ . '../../repository/common/dbc_repository.php');
 require(__DIR__ . '../../repository/guitarwars/guitarwars_repository_insert.php');
-require(__DIR__ . '../../repository/guitarwars/guitarwars_repository_upload_screenshot.php');
-require(__DIR__ . '../../repository/guitarwars/guitarwars_repository_delete_screenshot.php');
+require(__DIR__. '../../repository/file/file_repository_upload.php');
+require(__DIR__. '../../repository/file/file_repository_delete.php');
 
 function guitarwars_service_add_score(
     string $name,
@@ -23,19 +23,20 @@ function guitarwars_service_add_score(
 
     if ($validation_result != null) {
 
-        guitarwars_repository_delete_screenshot($screenshot_tmp);
+        file_repository_delete($screenshot_tmp, GW_IMAGE_PATH);
 
         return $validation_result;
     }
 
-    $upload_result = guitarwars_repository_upload_screenshot(
+    $upload_result = file_repository_upload(
         $screenshot_name,
-        $screenshot_tmp
+        $screenshot_tmp,
+        GW_IMAGE_PATH
     );
 
     if (!$upload_result) {
 
-        guitarwars_repository_delete_screenshot($screenshot_tmp);
+        file_repository_delete($screenshot_tmp, GW_IMAGE_PATH);
 
         return 'Error to upload file';
     }

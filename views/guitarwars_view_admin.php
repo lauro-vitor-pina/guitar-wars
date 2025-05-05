@@ -1,6 +1,6 @@
 <?php
 
-require(__DIR__ . '../../controllers/guitarwars_controller_admin.php');
+require(__DIR__ . '../../controllers/guitarwars/guitarwars_controller_admin.php');
 
 $view_model_result = guitarwars_controller_admin();
 
