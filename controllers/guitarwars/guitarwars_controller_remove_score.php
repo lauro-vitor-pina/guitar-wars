@@ -1,9 +1,12 @@
 <?php
 
 require_once(__DIR__ . '../../../models/services/guitarwars_service_delete.php');
+require_once(__DIR__ . '/guitarwars_controller_autorize.php');
 
 function guitarwars_controller_remove_score()
 {
+    guitarwars_controller_autorize();
+    
     $view_model_result = builder_view_model_result();
 
     if (isset($_POST['submit'])) {
