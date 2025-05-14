@@ -7,7 +7,7 @@ function guitarwars_controller_admin()
 {
     guitarwars_controller_autorize();
 
-    $view_model_result = guitarwars_service_select();
+    $view_model_result = guitarwars_service_select(null, false, null, 'date', 'DESC');
 
     return $view_model_result;
 }

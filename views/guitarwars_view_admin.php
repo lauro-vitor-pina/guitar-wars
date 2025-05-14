@@ -25,7 +25,10 @@ $view_model_result = guitarwars_controller_admin();
             <th>Screenshot</th>
             <th>Action</th>
         </tr>
-        <?php while ($row = mysqli_fetch_array($view_model_result['select_result'])) { ?>
+        
+        <?php $rows = $view_model_result['select_result'];
+
+        foreach ($rows as $row) { ?>
             <tr>
                 <td><?php echo $row['name']; ?></td>
                 <td><?php echo $row['date']; ?></td>
@@ -43,6 +46,11 @@ $view_model_result = guitarwars_controller_admin();
                     <a href="guitarwars_view_remove_score.php?<?php echo $query_string; ?>">
                         Remove
                     </a>
+                    <?php
+                    if ($row['approved'] == 0) {
+                        echo '/ <a href="guitarwars_view_approve_score.php?id=' . $row['id'] . '">Approve</a>';
+                    }
+                    ?>
                 </td>
             </tr>
         <?php } ?>

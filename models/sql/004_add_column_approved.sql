@@ -1,0 +1,1 @@
+ALTER TABLE `tb_guitarwars` ADD COLUMN `approved` TINYINT NOT NULL DEFAULT 0;
