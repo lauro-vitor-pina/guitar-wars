@@ -15,10 +15,13 @@ function dbc_repository_get_connection()
     return $dbc;
 }
 
-function dbc_repository_close_connection($dbc)
+function dbc_repository_close_connection(?mysqli $dbc)
 {
-    mysqli_close($dbc);
+    if ($dbc != null) {
+        mysqli_close($dbc);
+    }
 }
+
 
 
 function dbc_repository_is_local_environment()
