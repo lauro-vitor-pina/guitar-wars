@@ -1,15 +1,13 @@
 <?php
 
+
 function guitarwars_controller_autorize()
 {
-    $username = 'rock';
-    $password = 'roll';
-
     if (
         !isset($_SERVER['PHP_AUTH_USER']) ||
         !isset($_SERVER['PHP_AUTH_PW']) ||
-        $_SERVER['PHP_AUTH_USER'] != $username ||
-        $_SERVER['PHP_AUTH_PW'] != $password
+        $_SERVER['PHP_AUTH_USER'] != ADMIN_AUTH_USER ||
+        $_SERVER['PHP_AUTH_PW'] != ADMIN_AUTH_PASSWORD
     ) {
         header('HTTP/1.1 401 Unauthorized');
         header('WWW-Authenticate: Basic realm="Guitar Wars"');

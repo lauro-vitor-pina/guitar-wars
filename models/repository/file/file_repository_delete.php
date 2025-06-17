@@ -10,7 +10,7 @@ function file_repository_delete(?string $file_name, string $path)
 
     $file = get_absolute_path($path) . DIRECTORY_SEPARATOR . $file_name;
 
-    if ($file != null) {
+    if ($file != null && file_exists($file)) {
         unlink($file); //deletes a file
     }
 }

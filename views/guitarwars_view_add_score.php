@@ -51,7 +51,7 @@ $result_view_model = guitarwars_controller_add_score();
 
             <div>
                 <label for="screenshot">Screenshot:</label>
-                <input type="file" id="screenshot" name="screenshot" value="<?php echo $result_view_model['screenshot']; ?>" />
+                <input type="file" id="screenshot" name="screenshot"  />
             </div>
 
             <hr>
