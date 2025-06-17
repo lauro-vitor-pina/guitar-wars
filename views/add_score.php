@@ -27,7 +27,7 @@ $result_view_model = guitarwars_controller_add_score();
             <img src="<?php echo URL_IMAGE_PROXY . $result_view_model['screenshot_name']; ?>" alt="">
         </p>
         <p>
-            <a href="guitarwars_view_list_score.php">&lt;&lt; Back to high scores</a>
+            <a href="list_score.php">&lt;&lt; Back to high scores</a>
         </p>
 
     <?php } else { ?>

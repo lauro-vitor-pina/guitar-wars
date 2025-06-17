@@ -43,12 +43,12 @@ $view_model_result = guitarwars_controller_admin();
                         'score=' . $row['score'] . '&amp;' .
                         'screenshot=' . $row['screenshot'];
                     ?>
-                    <a href="guitarwars_view_remove_score.php?<?php echo $query_string; ?>">
+                    <a href="remove_score.php?<?php echo $query_string; ?>">
                         Remove
                     </a>
                     <?php
                     if ($row['approved'] == 0) {
-                        echo '/ <a href="guitarwars_view_approve_score.php?id=' . $row['id'] . '">Approve</a>';
+                        echo '/ <a href="approve_score.php?id=' . $row['id'] . '">Approve</a>';
                     }
                     ?>
                 </td>

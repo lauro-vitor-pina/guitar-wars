@@ -36,7 +36,7 @@ $view_model_result = guitarwars_controller_remove_score();
             <span><?php echo $view_model_result['score']; ?></span>
         </p>
 
-        <form action="guitarwars_view_remove_score.php" method="post">
+        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 
             <p>
                 <input type="radio" name="confirm" value="Yes" <?php echo $view_model_result['confirm'] == 'Yes' ? 'checked' : '' ?> /> Yes
@@ -59,7 +59,7 @@ $view_model_result = guitarwars_controller_remove_score();
     } ?>
 
 
-    <a href="guitarwars_view_admin.php">&lt;&lt;Back to admin Page</a>
+    <a href="admin.php">&lt;&lt;Back to admin Page</a>
 </body>
 
 </html>

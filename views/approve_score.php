@@ -65,7 +65,7 @@ $result = guitarwars_controller_aprove_score();
     <?php } ?>
 
 
-    <a href="guitarwars_view_admin.php">&lt;&lt;Back to admin Page</a>
+    <a href="admin.php">&lt;&lt;Back to admin Page</a>
 </body>
 
 </html>

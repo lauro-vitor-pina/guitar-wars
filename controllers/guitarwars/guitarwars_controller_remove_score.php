@@ -12,7 +12,7 @@ function guitarwars_controller_remove_score()
     if (isset($_POST['submit'])) {
 
         if ($view_model_result['confirm'] == 'No') {
-            header('Location: guitarwars_view_admin.php');
+            header('Location: admin.php');
             exit;
         }
 

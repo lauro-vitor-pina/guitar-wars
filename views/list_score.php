@@ -34,7 +34,7 @@ $result_view_model = guitarwars_controller_list_score();
     <h2>Guitar Wars - High Scores</h2>
     <p>
         Welcome, Guitar Waiors, do you have what it takes to crack the high score list ? if so,
-        <a href="guitarwars_view_add_score.php">just add your score</a>.
+        <a href="add_score.php">just add your score</a>.
     </p>
     <hr>
     <?php
