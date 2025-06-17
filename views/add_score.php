@@ -1,7 +1,7 @@
 <?php
 require_once(__DIR__ . '../../appvars.php');
-
 require_once(__DIR__ . '../../controllers/guitarwars/guitarwars_controller_add_score.php');
+require_once(__DIR__ . '/includes/session_start.php');
 
 $result_view_model = guitarwars_controller_add_score();
 
@@ -52,6 +52,13 @@ $result_view_model = guitarwars_controller_add_score();
             <div>
                 <label for="screenshot">Screenshot:</label>
                 <input type="file" id="screenshot" name="screenshot"  />
+            </div>
+            <br>
+
+            <div>
+                <label for="verify">Verifcation:</label>
+                <input type="text" id="verify" name="verify" placeholder="Enter the pass">
+                <img src="includes/captcha.php" alt="Captcha">
             </div>
 
             <hr>

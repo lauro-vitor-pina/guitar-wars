@@ -4,6 +4,7 @@ require(__DIR__ . '../../repository/common/dbc_repository.php');
 require(__DIR__ . '../../repository/guitarwars/guitarwars_repository_insert.php');
 require(__DIR__ . '../../repository/file/file_repository_upload.php');
 require(__DIR__ . '../../repository/file/file_repository_delete.php');
+require(__DIR__ . '../../validator/captcha_validator.php');
 
 function guitarwars_service_add_score(): array
 {
@@ -29,6 +30,7 @@ function guitarwars_service_add_score(): array
     $screenshot_tmp =  trim($_FILES['screenshot']['tmp_name']);
     $screenshot_size = trim($_FILES['screenshot']['size']);
     $screenshot_type =  trim($_FILES['screenshot']['type']);
+    $verify = mysqli_real_escape_string($dbc, trim($_POST['verify']));
 
     try {
 
@@ -41,7 +43,8 @@ function guitarwars_service_add_score(): array
             $name,
             $score,
             $screenshot_type,
-            $screenshot_size
+            $screenshot_size,
+            $verify
         );
 
         file_repository_upload(
@@ -74,7 +77,7 @@ function guitarwars_service_add_score(): array
     return $view_model;
 }
 
-function validate_add_score(string $name, string $score, string $screenshot_type, int $screenshot_size): void
+function validate_add_score(string $name, string $score, string $screenshot_type, int $screenshot_size, string $verify): void
 {
 
     if (empty($name)) {
@@ -103,6 +106,10 @@ function validate_add_score(string $name, string $score, string $screenshot_type
 
     if ($screenshot_size > GW_MAXFILESIZE) {
         throw new Exception('The screen shot file cant be greater than ' . (GW_MAXFILESIZE / 1024) . 'KB');
+    }
+
+    if(!captcha_validator($verify)){
+        throw new Exception('Please enter the verification pass-phrase exactly as shown');
     }
 }
 
